@@ -19,7 +19,7 @@ npm i local-mock -D
         ```javascript
         // mock/user/address.js
         
-        import { Mock }  from 'local'; 
+        import { Mock }  from 'local-mock'; 
         // 为了方便模拟动态数据，内置了mockjs。
         // 这是它的文档 http://mockjs.com/examples.html
 
