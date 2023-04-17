@@ -2,7 +2,7 @@
 是一款简单易用的本地http-mock工具。 
 # 安装
 ```
-npm i mock666 -D --registry=http://ires.58corp.com/repository/58npm/
+npm i local-mock -D
 ```
 # 使用
 1. 新建mock文件夹，支持两种mock数据配置方式
@@ -19,7 +19,7 @@ npm i mock666 -D --registry=http://ires.58corp.com/repository/58npm/
         ```javascript
         // mock/user/address.js
         
-        import { Mock }  from 'mock666'; 
+        import { Mock }  from 'local'; 
         // 为了方便模拟动态数据，内置了mockjs。
         // 这是它的文档 http://mockjs.com/examples.html
 
@@ -34,9 +34,9 @@ npm i mock666 -D --registry=http://ires.58corp.com/repository/58npm/
         ```
 2. 启动mock服务
     ```shell
-    npx mock666 // 不带参数
-    npx mock666 --dir src/mock // 指定mock文件目录为src/mock, 默认为项目根路径下的 mock 文件夹。
-    npx mock666 --port 5000 // 指定端口为5000, 默认端口为5555。
+    npx local-mock // 不带参数
+    npx local-mock --dir src/mock // 指定mock文件目录为src/mock, 默认为项目根路径下的 mock 文件夹。
+    npx local-mock --port 5000 // 指定端口为5000, 默认端口为5555。
     ```
  - 推荐与本地开发服务器一起启动，方便快捷。
     1. 配置mock专用的`script`
@@ -47,7 +47,7 @@ npm i mock666 -D --registry=http://ires.58corp.com/repository/58npm/
         ...
         "scripts": {
             "dev":"vite",
-            "mock": "cross-env NODE_ENV=mock npm run dev & mock666",
+            "mock": "cross-env NODE_ENV=mock npm run dev & local-mock",
             ...
         }
         }

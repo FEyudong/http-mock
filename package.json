@@ -1,6 +1,6 @@
 {
-  "name": "mock666",
-  "version": "1.0.3",
+  "name": "local-mock",
+  "version": "1.0.0",
   "description": "",
   "bin": "./bin/index.js",
   "type": "module",
