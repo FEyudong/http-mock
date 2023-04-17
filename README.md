@@ -5,8 +5,9 @@
 npm i local-mock -D
 ```
 # 使用
-1. 新建mock文件夹，支持两种mock数据配置方式
-    - JSON文件
+1. **新建mock目录，添加mock文件。**
+同时支持以下两种mock数据配置方式：
+    - JSON文件（提供静态数据）
         ```json
         // mock/user/baseInfo.json
         {
@@ -15,7 +16,7 @@ npm i local-mock -D
             "data":[]
         }
         ```
-    - javascript文件
+    - javascript文件（提供动态数据）
         ```javascript
         // mock/user/address.js
         
@@ -32,7 +33,7 @@ npm i local-mock -D
         })
         export default data
         ```
-2. 启动mock服务
+2. **启动mock服务**
     ```shell
     npx local-mock // 不带参数
     npx local-mock --dir src/mock // 指定mock文件目录为src/mock, 默认为项目根路径下的 mock 文件夹。
@@ -44,12 +45,12 @@ npm i local-mock -D
         ```
         // package.json
         {
-        ...
-        "scripts": {
-            "dev":"vite",
-            "mock": "cross-env NODE_ENV=mock npm run dev & local-mock",
             ...
-        }
+            "scripts": {
+                "dev":"vite",
+                "mock": "cross-env NODE_ENV=mock npm run dev & local-mock",
+                ...
+                }
         }
         ...
         ```
@@ -57,21 +58,27 @@ npm i local-mock -D
         ```shell
         npm run mock
         ```
-3. 修改公共请求路径
-    ```javascript
-    let baseUrl = '';
+3. **修改请求地址** 
+    - 全局请求mock
+    修改公共请求路径
+        ```javascript
+        let baseUrl = '';
 
-    if (process.env.NODE_ENV === 'mock') {
-        baseUrl = 'http://localhost:5555'; // 配置mock服务请求地址及端口
-    }
-    // 公共的请求方法
-    export const http = (path)=> {
-        return fetch(`${baseUrl}${path}`).then((res)=>res.json())
-    }
-    
-    ```
-4. 配置已完成，可以在项目中试试mock效果了。请求路径与mock文件相对mock文件夹的路径一致。比如下边这样：
+        if (process.env.NODE_ENV === 'mock') {
+            baseUrl = 'http://localhost:5555'; // 配置mock服务请求地址及端口
+        }
+        // 公共的请求方法
+        export const http = (path)=> {
+            return fetch(`${baseUrl}${path}`).then((res)=>res.json())
+        }
+        
+        ```
+    - 单个请求mock
+    直接请求`http://localhost:端口/路径`即可。
+
+4. **配置完成**。可以在项目中试试mock效果了。
+**mock文件相对mock目录的路径** 需要与 **请求路径** 保持一致。比如下边这样：
     ```javascript
-   const data = await http('/user/baseInfo');
+   const data = await http('/user/baseInfo'); // mock文件路径为 mock/user/baseInfo.json
    console.log('data',data)
     ```
